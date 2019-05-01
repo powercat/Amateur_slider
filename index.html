@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+        <title>Amateur slider</title>
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/amateur_slider.css">
+        <script type="text/javascript" src="js/amateur_slider.js"></script>
+        <script>
+            amateur_slider({slider_user_ele :".slider",
+                            slider_speed_setup:100,
+                            slider_pager_bool:false,
+                            slider_btn_bool:false,
+                            slider_auto_time_setup:5000,
+                            slider_mouse_bool:false,
+                            max_width_setup :600,
+                            width_setup:1000,
+                            slider_touch_bool:false})
+            amateur_slider({slider_user_ele : ".slider2"})
+        </script>
+    </head>
+    <body>
+        <div class="slider">
+            <ul class="slider_img cf">
+                <li>
+                    <a href="#">
+                        <img src="img/slider_img_1.jpg" alt="slider_img_1">
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="img/slider_img_2.jpg" alt="slider_img_2">
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="img/slider_img_3.jpg" alt="slider_img_3">
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="slider2">
+            <ul class="slider_img cf">
+                <li>
+                    <a href="#">
+                        <img src="img/slider_img_1.jpg" alt="slider_img_1">
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="img/slider_img_2.jpg" alt="slider_img_2">
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="img/slider_img_3.jpg" alt="slider_img_3">
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </body>
+</html>
