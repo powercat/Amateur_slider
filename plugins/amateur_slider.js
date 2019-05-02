@@ -1,6 +1,6 @@
 /*
     *MIT License
-    *Amateur_slider Ver 1.0.1
+    *Amateur_slider Ver 1.0.2
     *Copyright (c) 2019 Kim Ki Soon
     *https://github.com/powercat/Amateur_slider
 */
@@ -303,6 +303,10 @@ let amateur_slider = function({slider_user_ele,max_width_setup,width_setup,slide
             },false);
             let touchmove_bool = true;
             let slider_touchmove_function = function(e){
+                if(slider_delay_click){
+                    e.preventDefault();
+                    return;
+                }
                 if(slider_delay){
                     slider.removeEventListener("touchmove",slider_touchmove_function,false);
                     touchmove_bool = false;
