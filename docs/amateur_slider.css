@@ -3,13 +3,9 @@
     margin:0;
     padding:0;
 }
-body{
-    height:2000px;
-}
 .amateur_slider{
     overflow:hidden;
     position:relative;
-    margin-bottom:30px;
     width:980px;
     left:50%;
     transform:translateX(-50%);

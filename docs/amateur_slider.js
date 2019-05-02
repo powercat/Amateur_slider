@@ -1,3 +1,9 @@
+/*
+    *MIT License
+    *Amateur_slider Ver 1.0.0
+    *Copyright (c) 2019 Kim Ki Soon
+    *https://github.com/powercat/Amateur_slider
+*/
 let amateur_slider = function({slider_user_ele,max_width_setup,width_setup,slider_btn_bool_setup,slider_pager_bool_setup,slider_auto_time_setup,slider_speed_setup,slider_mouse_bool_setup,slider_touch_bool_setup,slider_auto_bool_setup}){
     let slider_btn_boolean = true,
         slider_pager_boolean = true,
@@ -86,7 +92,6 @@ let amateur_slider = function({slider_user_ele,max_width_setup,width_setup,slide
                 slider_li_copy[i].innerHTML = slider_li[i-slider_li.length].innerHTML;
             }else{
                 slider_li_copy[i].innerHTML = slider_li[i].innerHTML;
-
             }
             slider.appendChild(slider_li_copy[i]);
             slider_li_copy[i].style.width = slider_li_width+"px";
