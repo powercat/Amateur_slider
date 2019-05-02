@@ -1,22 +1,26 @@
-let amateur_slider = function({slider_user_ele,max_width_setup,width_setup,slider_btn_bool,slider_pager_bool,slider_auto_time_setup,slider_speed_setup,slider_mouse_bool,slider_touch_bool}){
+let amateur_slider = function({slider_user_ele,max_width_setup,width_setup,slider_btn_bool_setup,slider_pager_bool_setup,slider_auto_time_setup,slider_speed_setup,slider_mouse_bool_setup,slider_touch_bool_setup,slider_auto_bool_setup}){
     let slider_btn_boolean = true,
         slider_pager_boolean = true,
         slider_auto_time = 10000,
         slider_speed = 500,
         slider_speed2 = 0.5,
         slider_mouse_boolean = true,
-        slider_touch_boolean = true;
-    if(slider_btn_bool===false){
+        slider_touch_boolean = true,
+        slider_auto_boolean = true;
+    if(slider_btn_bool_setup===false){
         slider_btn_boolean = false;
     }
-    if(slider_pager_bool===false){
+    if(slider_pager_bool_setup===false){
         slider_pager_boolean = false;
     }
-    if(slider_mouse_bool===false){
+    if(slider_mouse_bool_setup===false){
         slider_mouse_boolean = false;
     }
-    if(slider_touch_bool===false){
+    if(slider_touch_bool_setup===false){
         slider_touch_boolean = false;
+    }
+    if(slider_auto_bool_setup===false){
+        slider_auto_boolean=false;
     }
     if(slider_auto_time_setup){
         slider_auto_time=slider_auto_time_setup;
@@ -28,10 +32,11 @@ let amateur_slider = function({slider_user_ele,max_width_setup,width_setup,slide
     document.addEventListener('DOMContentLoaded',function(){
         /*-----------------------slider------------------------*/
         const user_html_ele = document.querySelector(slider_user_ele),
-              slider = user_html_ele.querySelector('.slider_img'),
+              slider = document.querySelector(slider_user_ele+">ul"),
               slider_li = slider.querySelectorAll('li'),
               slider_pager = document.createElement('ul'),
               body_ele = document.body;
+        slider.classList.add('slider_img');
         user_html_ele.classList.add('amateur_slider');
         slider_pager.classList.add('slider_pager');
         let slider_width=0,
@@ -192,14 +197,18 @@ let amateur_slider = function({slider_user_ele,max_width_setup,width_setup,slide
                   slider_btn_prev = slider_btn.querySelector('.prev_btn');
             slider_btn_next.addEventListener('click',function(e){
                 e.preventDefault();
-                clearInterval(slider_auto);
-                slider_auto = setInterval(slider_next,slider_auto_time);
+                if(slider_auto_boolean){
+                    clearInterval(slider_auto);
+                    slider_auto = setInterval(slider_next,slider_auto_time);
+                }
                 slider_next();
             },false)
             slider_btn_prev.addEventListener('click',function(e){
                 e.preventDefault();
-                clearInterval(slider_auto);
-                slider_auto = setInterval(slider_next,slider_auto_time);
+                if(slider_auto_boolean){
+                    clearInterval(slider_auto);
+                    slider_auto = setInterval(slider_next,slider_auto_time);
+                }
                 slider_prev();
             },false)
             slider_btn_next.addEventListener('dragstart',function(e){
@@ -218,8 +227,10 @@ let amateur_slider = function({slider_user_ele,max_width_setup,width_setup,slide
                     })
                     slider_pager_li[i].addEventListener('click',function(e){
                         e.preventDefault();
-                        clearInterval(slider_auto);
-                        slider_auto = setInterval(slider_next,slider_auto_time);
+                        if(slider_auto_boolean){
+                            clearInterval(slider_auto);
+                            slider_auto = setInterval(slider_next,slider_auto_time);
+                        }
                         if(slider_delay||slider_num==i){
                             return;
                         }
@@ -260,26 +271,53 @@ let amateur_slider = function({slider_user_ele,max_width_setup,width_setup,slide
         /*-----------------slider_touch------------------*/
         let slider_pointer_x,
             slider_pointer_x_now,
-            slider_auto = setInterval(slider_next,slider_auto_time),
+            slider_auto,
             slider_auto_bool = true;
+        if(slider_auto_boolean){
+            slider_auto = setInterval(slider_next,slider_auto_time);
+        }
         if(slider_touch_boolean){
             slider.addEventListener("touchstart",function(e){
-                slider_pointer_x=e.targetTouches[0].clientX;
-                if(slider_auto_bool){
-                    clearInterval(slider_auto);
-                    slider_auto_bool=false;
+                if(slider_delay){
+                    e.preventDefault();
+                    return;
                 }
-            },{passive:true},false);
-            slider.addEventListener("touchmove",function(e){
+                slider_pointer_x=e.targetTouches[0].clientX;
+                if(slider_auto_boolean){
+                    if(slider_auto_bool){
+                        clearInterval(slider_auto);
+                        slider_auto_bool=false;
+                    }
+                }
+            },false);
+            let touchmove_bool = true;
+            let slider_touchmove_function = function(e){
+                if(slider_delay){
+                    slider.removeEventListener("touchmove",slider_touchmove_function,false);
+                    touchmove_bool = false;
+                    e.preventDefault();
+                    return;
+                }
                 slider_pointer_x_now=e.targetTouches[0].clientX;
                 let slider_calc_1 = -slider_li_width*slider_li.length;
                 let slider_calc_2 = slider_pointer_x-slider_pointer_x_now;
                 slider.style.transform ="translateX("+(slider_calc_1-slider_calc_2)+"px)";
-            },{passive:true},false);
+            }
+            slider.addEventListener("touchmove",slider_touchmove_function,false);
             slider.addEventListener("touchend",function(e){
-                if(!slider_auto_bool){
-                    slider_auto = setInterval(slider_next,slider_auto_time);
-                    slider_auto_bool=true;
+                if(!touchmove_bool){
+                    slider.addEventListener("touchmove",slider_touchmove_function,false);
+                    touchmove_bool = true;
+                   }
+                if(slider_delay){
+                    e.preventDefault();
+                    return;
+                }
+                if(slider_auto_boolean){   
+                    if(!slider_auto_bool){
+                        slider_auto = setInterval(slider_next,slider_auto_time);
+                        slider_auto_bool=true;
+                    }
                 }
                 if(slider_pointer_x_now){
                     if(slider_pointer_x+60<slider_pointer_x_now){
@@ -307,27 +345,44 @@ let amateur_slider = function({slider_user_ele,max_width_setup,width_setup,slide
                     slider_pager.style.pointerEvents="none";
                 },
                 mouse_down_bool = false,
-                mouse_drag_bool = false;
+                mouse_drag_bool = false,
+                slider_delay_click = false;
             slider.addEventListener("dragstart",function(e){
                 mouse_drag_bool=true;
                 pointer_off();
                 e.preventDefault();
             })
             slider.addEventListener("click",function(e){
+                if(slider_delay_click){
+                    e.preventDefault();
+                    slider_delay_click=false;
+                    return;
+                }
                 if(mouse_drag_bool){
                     mouse_drag_bool=false;
                     e.preventDefault();
                 }
             })
             slider.addEventListener("mousedown",function(e){
+                if(slider_delay){
+                    slider_delay_click = true;
+                    e.preventDefault();
+                    return;
+                }
                 mouse_down_bool=true;
                 slider_pointer_x=e.clientX;
-                if(slider_auto_bool){
-                    clearInterval(slider_auto);
-                    slider_auto_bool=false;
+                if(slider_auto_boolean){
+                    if(slider_auto_bool){
+                        clearInterval(slider_auto);
+                        slider_auto_bool=false;
+                    }
                 }
             },false);
             slider.addEventListener("mousemove",function(e){
+                if(slider_delay){
+                    e.preventDefault();
+                    return;
+                }
                 if(mouse_down_bool){
                     slider_pointer_x_now=e.clientX;
                     let slider_calc_1 = -slider_li_width*slider_li.length;
@@ -336,11 +391,17 @@ let amateur_slider = function({slider_user_ele,max_width_setup,width_setup,slide
                 }
             },false);
             let mouse_end = function(e){
+                if(slider_delay){
+                    e.preventDefault();
+                    return;
+                }
                 pointer_on();
                 mouse_down_bool=false;
-                if(!slider_auto_bool){
-                    slider_auto = setInterval(slider_next,slider_auto_time);
-                    slider_auto_bool=true;
+                if(slider_auto_boolean){
+                    if(!slider_auto_bool){
+                        slider_auto = setInterval(slider_next,slider_auto_time);
+                        slider_auto_bool=true;
+                    }
                 }
                 if(slider_pointer_x_now){
                     if(slider_pointer_x+60<slider_pointer_x_now){

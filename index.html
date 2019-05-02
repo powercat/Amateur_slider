@@ -5,24 +5,32 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
         <title>Amateur slider</title>
         <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/amateur_slider.css">
         <script type="text/javascript" src="js/amateur_slider.js"></script>
         <script>
-            amateur_slider({slider_user_ele :".slider",
+            /*amateur_slider({slider_user_ele :".slider",
                             slider_speed_setup:100,
-                            slider_pager_bool:false,
-                            slider_btn_bool:false,
+                            slider_pager_bool_setup:false,
+                            slider_btn_bool_setup:false,
                             slider_auto_time_setup:5000,
-                            slider_mouse_bool:false,
+                            slider_mouse_bool_setup:false,
                             max_width_setup :600,
                             width_setup:1000,
-                            slider_touch_bool:false})
-            amateur_slider({slider_user_ele : ".slider2"})
+                            slider_touch_bool_setup:false,
+                            slider_auto_bool_setup:false})*/
+            amateur_slider({slider_user_ele : ".slider",
+                           slider_speed_setup : 1000,
+                           slider_pager_bool_setup : false,
+                           slider_auto_time_setup : 5000})
+            amateur_slider({slider_user_ele : ".slider2",
+                           slider_auto_bool_setup:false,
+                           slider_auto_time_setup:100})
         </script>
     </head>
     <body>
         <div class="slider">
-            <ul class="slider_img cf">
+            <ul>
                 <li>
                     <a href="#">
                         <img src="img/slider_img_1.jpg" alt="slider_img_1">
@@ -41,7 +49,7 @@
             </ul>
         </div>
         <div class="slider2">
-            <ul class="slider_img cf">
+            <ul>
                 <li>
                     <a href="#">
                         <img src="img/slider_img_1.jpg" alt="slider_img_1">
