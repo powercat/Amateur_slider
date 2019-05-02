@@ -6,7 +6,6 @@
 .amateur_slider{
     overflow:hidden;
     position:relative;
-    width:980px;
     left:50%;
     transform:translateX(-50%);
     user-select:none;
