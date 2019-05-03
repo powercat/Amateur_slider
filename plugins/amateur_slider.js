@@ -1,10 +1,10 @@
 /*
     *MIT License
-    *Amateur_slider Ver 1.0.2
+    *Amateur_slider Ver 1.0.3
     *Copyright (c) 2019 Kim Ki Soon
     *https://github.com/powercat/Amateur_slider
 */
-let amateur_slider = function({slider_user_ele,max_width_setup,width_setup,slider_btn_bool_setup,slider_pager_bool_setup,slider_auto_time_setup,slider_speed_setup,slider_mouse_bool_setup,slider_touch_bool_setup,slider_auto_bool_setup,timing_function_setup}){
+let amateur_slider = function(setup_JSON){
     let slider_btn_boolean = true,
         slider_pager_boolean = true,
         slider_auto_time = 10000,
@@ -13,31 +13,34 @@ let amateur_slider = function({slider_user_ele,max_width_setup,width_setup,slide
         slider_mouse_boolean = true,
         slider_touch_boolean = true,
         slider_auto_boolean = true,
-        timing_function = "ease";
-    if(slider_btn_bool_setup===false){
+        timing_function = "ease",
+        max_width_setup=setup_JSON.max_width_setup,
+        width_setup=setup_JSON.width_setup,
+        slider_user_ele=setup_JSON.slider_user_ele;
+    if(setup_JSON.slider_btn_bool_setup===false){
         slider_btn_boolean = false;
     }
-    if(slider_pager_bool_setup===false){
+    if(setup_JSON.slider_pager_bool_setup===false){
         slider_pager_boolean = false;
     }
-    if(slider_mouse_bool_setup===false){
+    if(setup_JSON.slider_mouse_bool_setup===false){
         slider_mouse_boolean = false;
     }
-    if(slider_touch_bool_setup===false){
+    if(setup_JSON.slider_touch_bool_setup===false){
         slider_touch_boolean = false;
     }
-    if(slider_auto_bool_setup===false){
+    if(setup_JSON.slider_auto_bool_setup===false){
         slider_auto_boolean=false;
     }
-    if(slider_auto_time_setup){
-        slider_auto_time=slider_auto_time_setup;
+    if(setup_JSON.slider_auto_time_setup){
+        slider_auto_time=setup_JSON.slider_auto_time_setup;
     }
-    if(slider_speed_setup){
-        slider_speed=slider_speed_setup;
-        slider_speed2=slider_speed_setup*0.001;
+    if(setup_JSON.slider_speed_setup){
+        slider_speed=setup_JSON.slider_speed_setup;
+        slider_speed2=setup_JSON.slider_speed_setup*0.001;
     }
-    if(timing_function_setup){
-        timing_function=timing_function_setup;
+    if(setup_JSON.timing_function_setup){
+        timing_function=setup_JSON.timing_function_setup;
     }
     document.addEventListener('DOMContentLoaded',function(){
         /*-----------------------slider------------------------*/
