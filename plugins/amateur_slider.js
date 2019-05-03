@@ -1,6 +1,6 @@
 /*
     *MIT License
-    *Amateur_slider Ver 1.0.3
+    *Amateur_slider Ver 1.0.4
     *Copyright (c) 2019 Kim Ki Soon
     *https://github.com/powercat/Amateur_slider
 */
@@ -35,7 +35,7 @@ let amateur_slider = function(setup_JSON){
     if(setup_JSON.slider_auto_time_setup){
         slider_auto_time=setup_JSON.slider_auto_time_setup;
     }
-    if(setup_JSON.slider_speed_setup){
+    if(setup_JSON.slider_speed_setup||setup_JSON.slider_speed_setup==0){
         slider_speed=setup_JSON.slider_speed_setup;
         slider_speed2=setup_JSON.slider_speed_setup*0.001;
     }
@@ -64,7 +64,7 @@ let amateur_slider = function(setup_JSON){
         }
         let width_size_function = function(max_width_setup){
             let max_width;
-            if(max_width_setup){
+            if(max_width_setup||max_width_setup==0){
                 max_width = max_width_setup;
             }else{
                 slider_li_width = body_ele.clientWidth;
@@ -79,11 +79,18 @@ let amateur_slider = function(setup_JSON){
                 slider_btn.style.width=body_ele.clientWidth+"px";
                 slider_btn.style.marginLeft=-(body_ele.clientWidth/2)+"px";
             }else{
-                if(width_setup){
+                if(width_setup||width_setup==0){
                     slider_li_width = width_setup;
                     user_html_ele.style.width=width_setup+"px";
-                    slider_btn.style.width=width_setup+"px";
-                    slider_btn.style.marginLeft=-(width_setup/2)+"px";
+                    if(width_setup>=body_ele.clientWidth){
+                        slider_btn.style.width=body_ele.clientWidth+"px";
+                        slider_btn.style.marginLeft=-(body_ele.clientWidth/2)+"px";
+                        user_html_ele.parentElement.style.overflowX="hidden";
+                    }else{
+                        slider_btn.style.width=user_html_ele.clientWidth+"px";
+                        slider_btn.style.marginLeft=-(user_html_ele.clientWidth/2)+"px";
+                        user_html_ele.parentElement.style.overflowX="";
+                    }
                 }else{
                     slider_li_width = max_width;
                     user_html_ele.style.width=max_width+"px";
