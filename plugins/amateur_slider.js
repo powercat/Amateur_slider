@@ -85,11 +85,9 @@ let amateur_slider = function(setup_JSON){
                     if(width_setup>=body_ele.clientWidth){
                         slider_btn.style.width=body_ele.clientWidth+"px";
                         slider_btn.style.marginLeft=-(body_ele.clientWidth/2)+"px";
-                        user_html_ele.parentElement.style.overflowX="hidden";
                     }else{
                         slider_btn.style.width=user_html_ele.clientWidth+"px";
                         slider_btn.style.marginLeft=-(user_html_ele.clientWidth/2)+"px";
-                        user_html_ele.parentElement.style.overflowX="";
                     }
                 }else{
                     slider_li_width = max_width;
