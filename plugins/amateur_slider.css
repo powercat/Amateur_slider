@@ -1,7 +1,10 @@
 @charset "utf-8";
-*{
+.amateur_slider *{
     margin:0;
     padding:0;
+}
+.amateur_slider ul, .amateur_slider li{
+    list-style:none;
 }
 .amateur_slider{
     overflow:hidden;
