@@ -10,10 +10,12 @@
         <link rel="stylesheet" href="css/amateur_slider_min.css">
         <script type="text/javascript" src="js/amateur_slider_min.js"></script>
         <script>
-            amateur_slider({slider_user_ele : ".slider"})
+            amateur_slider({slider_user_ele : ".slider",
+                            max_width_setup : 1000})
             amateur_slider({slider_user_ele : ".slider2",
                             slider_pager_bool_setup:false,
-                            slider_auto_time_setup:5000})
+                            slider_auto_time_setup:5000,
+                            max_width_setup : 1000})
         </script>
     </head>
     <body>
@@ -57,7 +59,8 @@
                 </div>
                 <div class="script_code">
                     <h3>JavaScript</h3>
-                    <p>amateur_slider({<span class="darkorchid">slider_user_ele</span> : <span class="orange">".slider"</span>})</p>
+                    <p>amateur_slider({<span class="darkorchid">slider_user_ele</span> : <span class="orange">".slider"</span>,
+                           <span class="darkorchid">max_width_setup</span> : <span class="green">1000</span>})</p>
                 </div>
             </div>
             <div class="slider2">
@@ -78,7 +81,8 @@
                     <h3>JavaScript</h3>
 <p>amateur_slider({<span class="darkorchid">slider_user_ele</span> : <span class="orange">".slider2"</span>,
                            <span class="darkorchid">slider_pager_bool_setup</span> : <span class="orange">false</span>,
-                           <span class="darkorchid">slider_auto_time_setup</span> : <span class="green">5000</span>})</p>
+                           <span class="darkorchid">slider_auto_time_setup</span> : <span class="orange">5000</span>,
+                           <span class="darkorchid">max_width_setup</span> : <span class="green">1000</span>})</p>
                 </div>
             </div>
         </section>
